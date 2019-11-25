@@ -31,8 +31,10 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "androidx.preference:preference:1.1.0"
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'net.danlew:android.joda:2.10.2'
+    implementation 'net.danlew:android.joda:2.10.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'androidx.room:room-runtime:2.2.1'
     kapt 'androidx.room:room-compiler:2.2.1'

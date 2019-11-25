@@ -8,18 +8,23 @@ import android.os.Build
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
+import com.google.gson.GsonBuilder
 import net.danlew.android.joda.JodaTimeAndroid
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.ref.WeakReference
-import java.util.concurrent.ArrayBlockingQueue
-import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+
 
 class ApplicationContext: MultiDexApplication() {
 
     companion object {
 
-        private lateinit var threadPoolExecutor: ThreadPoolExecutor
+        var token: String = ""
         private lateinit var weakReference: WeakReference<Context>
 
         fun getAppContext(): Context? {
@@ -51,6 +56,31 @@ class ApplicationContext: MultiDexApplication() {
                 return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
                         nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
             }
+        }
+
+        fun getRetrofit(): Retrofit {
+            val interceptor = Interceptor { chain ->
+                val original = chain.request()
+                val request = original.newBuilder()
+                    .header("Authorization", "Bearer $token")
+                    .method(original.method(), original.body())
+                    .build()
+                chain.proceed(request)
+            }
+            val gson = GsonBuilder()
+                .setLenient()
+                .create()
+            val okHttpClient = OkHttpClient().newBuilder()
+                .addInterceptor(interceptor)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .build()
+            return Retrofit.Builder()
+                .baseUrl("http://192.168.0.220:8080/temperature/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
         }
 
     }

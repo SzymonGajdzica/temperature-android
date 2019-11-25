@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".credentials.register.RegisterActivityImpl">
+
+    <include layout="@layout/toolbar"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideCenter"
+            app:layout_constraintGuide_percent="0.5"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginLeft"
+            app:layout_constraintGuide_percent="0.1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginRight"
+            app:layout_constraintGuide_percent="0.9"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/registerTextView"
+            android:layout_marginBottom="10dp"
+            style="@style/TextView"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/registerToApp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:maxLines="3"
+            app:layout_constraintBottom_toTopOf="@id/newNameEditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newNameEditText"
+            android:hint="@string/name"
+            android:paddingTop="10dp"
+            style="@style/EditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintBottom_toTopOf="@id/newSurnameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newSurnameEditText"
+            android:hint="@string/surname"
+            style="@style/EditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintBottom_toTopOf="@id/newEmailEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newEmailEditText"
+            android:hint="@string/email"
+            style="@style/EditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintBottom_toTopOf="@id/guideCenter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newUsernameEditText"
+            android:hint="@string/username"
+            style="@style/EditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintTop_toBottomOf="@id/guideCenter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newPasswordEditText"
+            android:hint="@string/password"
+            style="@style/EditText"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintTop_toBottomOf="@id/newUsernameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/newPasswordConfirmEditText"
+            android:hint="@string/repeatPassword"
+            style="@style/EditText"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            app:layout_constraintTop_toBottomOf="@id/newPasswordEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerButton"
+            android:layout_marginTop="5dp"
+            style="@style/Button"
+            android:onClick="onClick"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/register"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:padding="2dp"
+            android:background="@drawable/button_border"
+            app:layout_constraintTop_toBottomOf="@id/newPasswordConfirmEditText"
+            app:layout_constraintStart_toStartOf="@id/marginLeft"
+            app:layout_constraintEnd_toEndOf="@id/marginRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <include layout="@layout/loading_layout"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
