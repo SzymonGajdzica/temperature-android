@@ -6,6 +6,7 @@ import pl.polsl.temperature.models.Credentials
 import pl.polsl.temperature.models.CredentialsResponse
 import pl.polsl.temperature.services.CredentialsService
 import pl.polsl.temperature.utils.OneToast
+import pl.polsl.temperature.utils.SettingsTools
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +24,9 @@ class LoginPresenterImpl(private val loginActivity: LoginActivity): LoginPresent
             }
 
             override fun onResponse(call: Call<CredentialsResponse>, response: Response<CredentialsResponse>) {
-                if(response.isSuccessful){
-                    ApplicationContext.token = response.body()?.token.toString()
+                val credentialsResponse = response.body()
+                if(response.isSuccessful && credentialsResponse != null){
+                    SettingsTools.setToken(credentialsResponse)
                     loginActivity.loginSucceed()
                 } else{
                     OneToast.show(response.getMessageString())

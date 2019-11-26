@@ -9,13 +9,17 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.loading_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
 import pl.polsl.temperature.R
+import pl.polsl.temperature.application.BaseActivity
 import pl.polsl.temperature.credentials.register.RegisterActivityImpl
 import pl.polsl.temperature.management.ManagementActivityImpl
 import pl.polsl.temperature.models.Credentials
 import pl.polsl.temperature.utils.OneToast
+import pl.polsl.temperature.utils.SettingsTools
 
-class LoginActivityImpl : AppCompatActivity(),
-    LoginActivity, View.OnClickListener {
+class LoginActivityImpl :
+    BaseActivity(),
+    LoginActivity,
+    View.OnClickListener {
 
     private val loginPresenter: LoginPresenter = LoginPresenterImpl(this)
 
@@ -23,9 +27,13 @@ class LoginActivityImpl : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setSupportActionBar(toolbar)
+        if(SettingsTools.getToken() != null)
+            loginSucceed()
     }
 
     override fun onClick(view: View?) {
+        if(isLoading())
+            return
         when(view?.id){
             R.id.noAccountButton -> openRegisterActivity()
             R.id.loginButton -> handleLoginClick()
@@ -50,15 +58,10 @@ class LoginActivityImpl : AppCompatActivity(),
         ))
     }
 
-    private fun showLoader(){
-        loader.visibility = View.VISIBLE
-    }
-
-    private fun hideLoader(){
-        loader.visibility = View.GONE
-    }
-
     override fun loginSucceed() {
+        setOf<EditText>(usernameEditText, passwordEditText).forEach {
+            it.text = null
+        }
         hideLoader()
         OneToast.show(R.string.loggedSuccessfully)
         startActivity(Intent(this, ManagementActivityImpl::class.java))

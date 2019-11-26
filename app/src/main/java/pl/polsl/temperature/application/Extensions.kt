@@ -2,11 +2,14 @@ package pl.polsl.temperature.application
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
 import pl.polsl.temperature.models.Message
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun Any?.toMString(): String{
     return this?.toString() ?: ""
@@ -34,3 +37,26 @@ fun <T> Response<T>.getMessage(): Message?{
 fun <T> Response<T>.getMessageString(): String?{
     return getMessage()?.run{ title + "\n" + description }
 }
+
+fun Date.dateToShortString(): String{
+    val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ", Locale.getDefault())
+    return sdf.format(this)
+}
+
+fun Date.dateToString(): String{
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+    return sdf.format(this)
+}
+
+fun String?.stringToDate(): Date?{
+    return try{
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+        sdf.parse(this.toString())
+    }catch (e: Throwable){
+        null
+    }
+}
+
+fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+fun Int.toDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()

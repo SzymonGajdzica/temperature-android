@@ -23,9 +23,9 @@ class RegisterPresenterImpl(private val loginActivity: RegisterActivity): Regist
             }
 
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
-                if(response.isSuccessful)
+                if(response.isSuccessful) {
                     loginActivity.registerSucceed()
-                else{
+                } else {
                     OneToast.show(response.getMessageString())
                     loginActivity.registerFailed()
                 }

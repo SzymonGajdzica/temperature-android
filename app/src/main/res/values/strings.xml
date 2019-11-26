@@ -6,8 +6,8 @@
     <string name="surname">Surname</string>
     <string name="email">Email</string>
     <string name="noAccount">No account? Click to create new!</string>
-    <string name="loginToApp">Login to temperature controller app</string>
-    <string name="registerToApp">Register new account in temperature controller app</string>
+    <string name="loginToApp">Login to sensor controller app</string>
+    <string name="registerToApp">Register new account in sensor controller app</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="repeatPassword">Repeat password</string>
@@ -15,4 +15,13 @@
     <string name="fillAllData">Fill all data</string>
     <string name="nowLogin">Now login with username and password</string>
     <string name="loggedSuccessfully">Logged successfully</string>
+    <string name="sessionExpired">Session expired</string>
+    <string name="loggingOut">Logging out</string>
+    <string name="startDate">Start date</string>
+    <string name="endDate">End date</string>
+    <string name="welcome">Welcome</string>
+    <string name="timeline">Timeline</string>
+    <string name="value">Value</string>
+    <string name="values">Values</string>
+    <string name="noMeasurements">This station does not have any measurements</string>
 </resources>

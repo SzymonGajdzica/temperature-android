@@ -9,10 +9,11 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.loading_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
 import pl.polsl.temperature.R
+import pl.polsl.temperature.application.BaseActivity
 import pl.polsl.temperature.models.RegisterUser
 import pl.polsl.temperature.utils.OneToast
 
-class RegisterActivityImpl : AppCompatActivity(),
+class RegisterActivityImpl : BaseActivity(),
     RegisterActivity, View.OnClickListener {
 
     private val loginPresenter: RegisterPresenter =
@@ -25,6 +26,8 @@ class RegisterActivityImpl : AppCompatActivity(),
     }
 
     override fun onClick(view: View?) {
+        if(isLoading())
+            return
         when(view?.id){
             R.id.registerButton -> handleRegisterClick()
         }
@@ -56,14 +59,6 @@ class RegisterActivityImpl : AppCompatActivity(),
             name = newNameEditText.text.toString(),
             email = newEmailEditText.text.toString()
         ))
-    }
-
-    private fun showLoader(){
-        loader.visibility = View.VISIBLE
-    }
-
-    private fun hideLoader(){
-        loader.visibility = View.GONE
     }
 
     override fun registerSucceed() {

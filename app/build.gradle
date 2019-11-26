@@ -31,18 +31,18 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "androidx.preference:preference:1.1.0"
-    implementation 'net.danlew:android.joda:2.10.3'
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.androidplot:androidplot-core:1.5.7"
 
-    implementation 'androidx.room:room-runtime:2.2.1'
-    kapt 'androidx.room:room-compiler:2.2.1'
+    implementation 'androidx.room:room-runtime:2.2.2'
+    kapt 'androidx.room:room-compiler:2.2.2'
     implementation 'androidx.arch.core:core-common:2.1.0'
 
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
