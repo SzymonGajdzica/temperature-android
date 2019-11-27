@@ -17,23 +17,9 @@ class LoginPresenterImpl(private val loginActivity: LoginActivity): LoginPresent
     private val credentialsService: CredentialsService = ApplicationContext.getRetrofit().create()
 
     override fun login(credentials: Credentials) {
-        credentialsService.login(credentials).enqueue(object: Callback<CredentialsResponse>{
-            override fun onFailure(call: Call<CredentialsResponse>, e: Throwable) {
-                OneToast.show(e.message)
-                loginActivity.loginFailed()
-            }
-
-            override fun onResponse(call: Call<CredentialsResponse>, response: Response<CredentialsResponse>) {
-                val credentialsResponse = response.body()
-                if(response.isSuccessful && credentialsResponse != null){
-                    SettingsTools.setToken(credentialsResponse)
-                    loginActivity.loginSucceed()
-                } else{
-                    OneToast.show(response.getMessageString())
-                    loginActivity.loginFailed()
-                }
-            }
-
+        credentialsService.login(credentials).enqueue(loginActivity.getContext().createCallback {
+            SettingsTools.setToken(it)
+            loginActivity.loginSucceed()
         })
     }
 

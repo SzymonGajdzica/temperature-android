@@ -2,9 +2,6 @@ package pl.polsl.temperature.application
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
@@ -28,31 +25,13 @@ class ApplicationContext: MultiDexApplication() {
             return weakReference.get()
         }
 
-        fun getString(id: Int): String?{
-            return getAppContext()
-                ?.getString(id)
-        }
-
         fun getSharedPreferences(): SharedPreferences?{
             return getAppContext()
                 ?.let { PreferenceManager.getDefaultSharedPreferences(it) }
         }
 
         fun log(vararg values: Any?){
-            Log.d(Keys.TAG, values.joinToString(separator = " "))
-        }
-
-        @Suppress("DEPRECATION")
-        fun isNetworkAvailable(): Boolean {
-            val connectivityManager = getAppContext()?.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-            if (Build.VERSION.SDK_INT < 23)
-                return connectivityManager?.activeNetworkInfo?.isConnected == true
-            else {
-                val nc = connectivityManager?.getNetworkCapabilities(connectivityManager.activeNetwork)
-                    ?: return false
-                return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-                        nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-            }
+            Log.d("halo", values.joinToString(separator = " "))
         }
 
         fun getRetrofit(): Retrofit {
@@ -62,7 +41,7 @@ class ApplicationContext: MultiDexApplication() {
                     .header("Authorization", "Bearer ${SettingsTools.getToken() ?: ""}")
                     .method(original.method(), original.body())
                     .build()
-                log("url = ", request.url())
+                log("url = ", request.url().url())
                 chain.proceed(request)
             }
             val gson = GsonBuilder()
@@ -76,6 +55,7 @@ class ApplicationContext: MultiDexApplication() {
                 .build()
             return Retrofit.Builder()
                 .baseUrl("https://temperature-controller.herokuapp.com/temperature/")
+                //.baseUrl("http://192.168.0.220:8080/temperature/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()

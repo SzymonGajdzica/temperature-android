@@ -7,6 +7,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
 import pl.polsl.temperature.models.Message
+import pl.polsl.temperature.models.Station
+import pl.polsl.temperature.models.StationReduced
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,22 +41,26 @@ fun <T> Response<T>.getMessageString(): String?{
 }
 
 fun Date.dateToShortString(): String{
-    val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ", Locale.getDefault())
+    val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ", Locale.ENGLISH)
     return sdf.format(this)
 }
 
 fun Date.dateToString(): String{
-    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH)
     return sdf.format(this)
 }
 
 fun String?.stringToDate(): Date?{
     return try{
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH)
         sdf.parse(this.toString())
     }catch (e: Throwable){
         null
     }
+}
+
+fun Station.reduce(): StationReduced{
+    return StationReduced(id, name)
 }
 
 fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()

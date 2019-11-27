@@ -7,5 +7,5 @@ data class User(
     var surname: String,
     var email: String,
     val rolesId: Set<Long>,
-    val gateways: List<Gateway>
+    val gateways: ArrayList<Gateway>
 )

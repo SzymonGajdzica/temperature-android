@@ -24,4 +24,16 @@
     <string name="value">Value</string>
     <string name="values">Values</string>
     <string name="noMeasurements">This station does not have any measurements</string>
+    <string name="addStation">Add station</string>
+    <string name="addMeasurementType">Add measurement type</string>
+    <string name="addGateway">Add gateway</string>
+    <string name="enterName">Enter name</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="gatewayAdded">gatewayAdded</string>
+    <string name="measurementTypeAdded">Measurement type added</string>
+    <string name="stationAdded">Station added</string>
+    <string name="firstAddGateway">First add gateway</string>
+    <string name="selectGateway">Select gateway</string>
+    <string name="selectStation">Select station</string>
 </resources>

@@ -26,8 +26,6 @@ class RegisterActivityImpl : BaseActivity(),
     }
 
     override fun onClick(view: View?) {
-        if(isLoading())
-            return
         when(view?.id){
             R.id.registerButton -> handleRegisterClick()
         }
@@ -51,7 +49,6 @@ class RegisterActivityImpl : BaseActivity(),
             OneToast.show(R.string.passwordsDoesNotMatch)
             return
         }
-        showLoader()
         loginPresenter.register(RegisterUser(
             username = newUsernameEditText.text.toString(),
             password = newPasswordEditText.text.toString(),
@@ -62,13 +59,12 @@ class RegisterActivityImpl : BaseActivity(),
     }
 
     override fun registerSucceed() {
-        hideLoader()
         OneToast.show(R.string.nowLogin)
         finish()
     }
 
-    override fun registerFailed() {
-        hideLoader()
+    override fun getContext(): BaseActivity {
+        return this
     }
 
 

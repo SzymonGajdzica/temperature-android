@@ -1,7 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".credentials.register.RegisterActivityImpl">
 
+    <item android:id="@+id/actionAddStation"
+        android:title="@string/addStation" />
+
+    <item android:id="@+id/actionAddGateway"
+        android:title="@string/addGateway" />
+
+    <item android:id="@+id/actionAddMeasurementType"
+        android:title="@string/addMeasurementType" />
 
 </menu>

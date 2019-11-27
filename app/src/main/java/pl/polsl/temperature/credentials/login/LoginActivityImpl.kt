@@ -32,8 +32,6 @@ class LoginActivityImpl :
     }
 
     override fun onClick(view: View?) {
-        if(isLoading())
-            return
         when(view?.id){
             R.id.noAccountButton -> openRegisterActivity()
             R.id.loginButton -> handleLoginClick()
@@ -51,7 +49,6 @@ class LoginActivityImpl :
             OneToast.show(R.string.fillAllData)
             return
         }
-        showLoader()
         loginPresenter.login(Credentials(
             username = usernameEditText.text.toString(),
             password = passwordEditText.text.toString()
@@ -62,13 +59,12 @@ class LoginActivityImpl :
         setOf<EditText>(usernameEditText, passwordEditText).forEach {
             it.text = null
         }
-        hideLoader()
         OneToast.show(R.string.loggedSuccessfully)
         startActivity(Intent(this, ManagementActivityImpl::class.java))
     }
 
-    override fun loginFailed() {
-        hideLoader()
+    override fun getContext(): BaseActivity {
+        return this
     }
 
 }

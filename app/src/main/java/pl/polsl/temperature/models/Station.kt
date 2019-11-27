@@ -3,5 +3,5 @@ package pl.polsl.temperature.models
 data class Station(
     val id: Long,
     var name: String,
-    val measurements: List<Measurement>
+    val measurements: ArrayList<Measurement>
 )
