@@ -3,14 +3,12 @@ package pl.polsl.temperature.credentials.register
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.loading_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.BaseActivity
-import pl.polsl.temperature.models.RegisterUser
+import pl.polsl.temperature.models.UserPost
 import pl.polsl.temperature.utils.OneToast
 
 class RegisterActivityImpl : BaseActivity(),
@@ -49,7 +47,7 @@ class RegisterActivityImpl : BaseActivity(),
             OneToast.show(R.string.passwordsDoesNotMatch)
             return
         }
-        loginPresenter.register(RegisterUser(
+        loginPresenter.register(UserPost(
             username = newUsernameEditText.text.toString(),
             password = newPasswordEditText.text.toString(),
             surname = newSurnameEditText.text.toString(),

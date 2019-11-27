@@ -1,6 +1,6 @@
 package pl.polsl.temperature.services
 
-import pl.polsl.temperature.models.AddMeasurementType
+import pl.polsl.temperature.models.MeasurementTypePost
 import pl.polsl.temperature.models.MeasurementType
 import retrofit2.Call
 import retrofit2.http.Body
@@ -12,7 +12,7 @@ interface MeasurementTypeService {
 
     @Headers("Content-Type: application/json")
     @POST("measurement_types/")
-    fun addMeasurementType(@Body addMeasurementType: AddMeasurementType): Call<MeasurementType>
+    fun addMeasurementType(@Body measurementTypePost: MeasurementTypePost): Call<MeasurementType>
 
     @Headers("Content-Type: application/json")
     @GET("measurement_types/")

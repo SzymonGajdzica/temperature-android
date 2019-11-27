@@ -1,6 +1,6 @@
 package pl.polsl.temperature.services
 
-import pl.polsl.temperature.models.AddStation
+import pl.polsl.temperature.models.StationPost
 import pl.polsl.temperature.models.Station
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,6 +16,6 @@ interface StationService {
 
     @Headers("Content-Type: application/json")
     @POST("stations/")
-    fun addStation(@Body addStation: AddStation): Call<Station>
+    fun addStation(@Body stationPost: StationPost): Call<Station>
 
 }

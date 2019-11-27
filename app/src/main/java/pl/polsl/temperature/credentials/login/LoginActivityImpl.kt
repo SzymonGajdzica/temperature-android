@@ -4,15 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.loading_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.BaseActivity
 import pl.polsl.temperature.credentials.register.RegisterActivityImpl
 import pl.polsl.temperature.management.ManagementActivityImpl
-import pl.polsl.temperature.models.Credentials
+import pl.polsl.temperature.models.AuthenticationPost
 import pl.polsl.temperature.utils.OneToast
 import pl.polsl.temperature.utils.SettingsTools
 
@@ -49,7 +47,7 @@ class LoginActivityImpl :
             OneToast.show(R.string.fillAllData)
             return
         }
-        loginPresenter.login(Credentials(
+        loginPresenter.login(AuthenticationPost(
             username = usernameEditText.text.toString(),
             password = passwordEditText.text.toString()
         ))

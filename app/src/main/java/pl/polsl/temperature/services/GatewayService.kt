@@ -8,6 +8,6 @@ interface GatewayService {
 
     @Headers("Content-Type: application/json")
     @POST("gateways/")
-    fun addGateway(@Body addGateway: AddGateway): Call<Gateway>
+    fun addGateway(@Body gatewayPost: GatewayPost): Call<Gateway>
 
 }

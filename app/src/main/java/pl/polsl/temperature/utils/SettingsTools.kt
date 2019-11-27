@@ -4,7 +4,7 @@ import androidx.core.content.edit
 import pl.polsl.temperature.application.ApplicationContext
 import pl.polsl.temperature.application.dateToString
 import pl.polsl.temperature.application.stringToDate
-import pl.polsl.temperature.models.CredentialsResponse
+import pl.polsl.temperature.models.Authentication
 import java.util.*
 
 object SettingsTools {
@@ -20,12 +20,12 @@ object SettingsTools {
         return null
     }
 
-    fun setToken(credentialsResponse: CredentialsResponse?){
+    fun setToken(authentication: Authentication?){
         ApplicationContext.getSharedPreferences()?.edit(commit = true) {
-            putString(tokenKey, credentialsResponse?.token)
+            putString(tokenKey, authentication?.token)
         }
         ApplicationContext.getSharedPreferences()?.edit(commit = true) {
-            putString(tokenExpirationDateKey, credentialsResponse?.expirationDate?.dateToString())
+            putString(tokenExpirationDateKey, authentication?.expirationDate?.dateToString())
         }
     }
 

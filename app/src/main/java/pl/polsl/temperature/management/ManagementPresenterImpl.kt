@@ -13,7 +13,6 @@ import pl.polsl.temperature.utils.OneToast
 import pl.polsl.temperature.utils.SettingsTools
 import retrofit2.create
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class ManagementPresenterImpl(private val managementActivity: ManagementActivity): ManagementPresenter {
@@ -45,7 +44,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
         if(checkTokenExpired())
             return
         val user = currentUser ?: return
-        gatewayService.addGateway(AddGateway(name, user)).enqueue(managementActivity.getContext().createCallback {gateway ->
+        gatewayService.addGateway(GatewayPost(name, user.id)).enqueue(managementActivity.getContext().createCallback { gateway ->
             OneToast.show(managementActivity.getContext().getString(R.string.gatewayAdded) + ", id = " + gateway.id)
             currentUser?.gateways?.add(gateway)
             managementActivity.updateUserData(user)
@@ -56,7 +55,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
         if(checkTokenExpired())
             return
         val user = currentUser ?: return
-        measurementTypeService.addMeasurementType(AddMeasurementType(name, user)).enqueue(managementActivity.getContext().createCallback { measurementType ->
+        measurementTypeService.addMeasurementType(MeasurementTypePost(name, user.id)).enqueue(managementActivity.getContext().createCallback { measurementType ->
             OneToast.show(managementActivity.getContext().getString(R.string.measurementTypeAdded) + ", id = " + measurementType.id)
             measurementTypes[measurementType.id] = measurementType
             managementActivity.updateUserData(user)
@@ -71,7 +70,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
         if(checkTokenExpired())
             return
         val gateway = currentGateway ?: return OneToast.show(R.string.firstAddGateway)
-        stationService.addStation(AddStation(name, gateway)).enqueue(managementActivity.getContext().createCallback { station ->
+        stationService.addStation(StationPost(name, gateway.id)).enqueue(managementActivity.getContext().createCallback { station ->
             OneToast.show(managementActivity.getContext().getString(R.string.stationAdded) + ", id = " + station.id)
             gateway.stations.add(station.reduce())
             currentUser?.let { managementActivity.updateUserData(it) }

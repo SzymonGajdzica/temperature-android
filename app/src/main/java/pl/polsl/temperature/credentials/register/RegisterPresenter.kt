@@ -1,9 +1,9 @@
 package pl.polsl.temperature.credentials.register
 
-import pl.polsl.temperature.models.RegisterUser
+import pl.polsl.temperature.models.UserPost
 
 interface RegisterPresenter {
 
-    fun register(registerUser: RegisterUser)
+    fun register(userPost: UserPost)
 
 }

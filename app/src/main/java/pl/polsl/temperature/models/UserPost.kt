@@ -1,6 +1,6 @@
 package pl.polsl.temperature.models
 
-data class RegisterUser(
+data class UserPost(
     val username: String,
     val password: String,
     val name: String,

@@ -1,6 +1,5 @@
 package pl.polsl.temperature.models
 
-data class AddGateway(
+data class StationPost(
     val name: String,
-    val user: User
-)
+    val gatewayId: Long)
