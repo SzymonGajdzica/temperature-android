@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
 import com.google.gson.GsonBuilder
+import net.danlew.android.joda.JodaTimeAndroid
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import pl.polsl.temperature.utils.SettingsTools
@@ -55,6 +56,7 @@ class ApplicationContext: MultiDexApplication() {
                 .build()
             return Retrofit.Builder()
                 .baseUrl("https://temperature-controller.herokuapp.com/temperature-controller/")
+                //.baseUrl("http://192.168.0.220:8080/temperature-controller/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
@@ -65,6 +67,7 @@ class ApplicationContext: MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         weakReference = WeakReference(applicationContext)
+        JodaTimeAndroid.init(this)
     }
 
 }

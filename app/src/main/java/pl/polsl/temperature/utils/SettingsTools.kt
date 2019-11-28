@@ -1,10 +1,12 @@
 package pl.polsl.temperature.utils
 
 import androidx.core.content.edit
+import org.joda.time.DateTime
 import pl.polsl.temperature.application.ApplicationContext
 import pl.polsl.temperature.application.dateToString
 import pl.polsl.temperature.application.stringToDate
 import pl.polsl.temperature.models.Authentication
+import java.time.DateTimeException
 import java.util.*
 
 object SettingsTools {
@@ -15,7 +17,7 @@ object SettingsTools {
     fun getToken(): String?{
         val sharedPreferences = ApplicationContext.getSharedPreferences() ?: return null
         val expirationDate = sharedPreferences.getString(tokenExpirationDateKey, null).stringToDate() ?: return null
-        if(expirationDate > Date())
+        if(expirationDate > DateTime.now())
             return sharedPreferences.getString(tokenKey, null)
         return null
     }
@@ -25,7 +27,7 @@ object SettingsTools {
             putString(tokenKey, authentication?.token)
         }
         ApplicationContext.getSharedPreferences()?.edit(commit = true) {
-            putString(tokenExpirationDateKey, authentication?.expirationDate?.dateToString())
+            putString(tokenExpirationDateKey, authentication?.expirationDate?.let { DateTime(it).dateToString() })
         }
     }
 

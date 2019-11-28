@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import com.androidplot.xy.*
 import kotlinx.android.synthetic.main.activity_management.*
+import org.joda.time.DateTime
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.*
 import pl.polsl.temperature.models.Measurement
@@ -23,7 +24,7 @@ class ManagementViewHelper(
 
     fun updateMeasurements(measurements: List<Measurement>) {
         measurements.forEach {
-            ApplicationContext.log(it.date.dateToString())
+            ApplicationContext.log(DateTime(it.date).dateToString())
         }
         val colorPrimary = ContextCompat.getColor(activity, R.color.colorPrimary)
         val measurementTypeIds = measurements.map { it.measurementTypeId }.distinct()
@@ -82,8 +83,8 @@ class ManagementViewHelper(
             .mShow(activity)
     }
 
-    fun showDateTimePicker(initialDate: Date, callback: (date: Date) -> Unit) {
-        val startDate = Calendar.getInstance().apply { time = initialDate }
+    fun showDateTimePicker(initialDate: DateTime, callback: (date: DateTime) -> Unit) {
+        val startDate = Calendar.getInstance().apply { time = initialDate.toDate() }
         val date: Calendar = Calendar.getInstance()
         DatePickerDialog(
             activity,
@@ -94,7 +95,7 @@ class ManagementViewHelper(
                     TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
                         date.set(Calendar.HOUR_OF_DAY, hourOfDay)
                         date.set(Calendar.MINUTE, minute)
-                        callback(date.time)
+                        callback(DateTime(date))
                     },
                     startDate[Calendar.HOUR_OF_DAY],
                     startDate[Calendar.MINUTE],

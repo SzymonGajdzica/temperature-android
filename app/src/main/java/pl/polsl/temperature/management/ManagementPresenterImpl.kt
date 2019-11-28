@@ -1,5 +1,6 @@
 package pl.polsl.temperature.management
 
+import org.joda.time.DateTime
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.ApplicationContext
 import pl.polsl.temperature.application.dateToString
@@ -24,8 +25,8 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
     private var currentUser: User? = null
     private var currentStation: StationReduced? = null
     private var currentGateway: Gateway? = null
-    private var startDate = Date(System.currentTimeMillis() - (60*60*1000))
-    private var endDate = Date()
+    private var startDate = DateTime(System.currentTimeMillis() - (60*60*1000))
+    private var endDate = DateTime()
     private val measurementTypes: HashMap<Long, MeasurementType> = hashMapOf()
     private var measurementTypesLoaded = false
 

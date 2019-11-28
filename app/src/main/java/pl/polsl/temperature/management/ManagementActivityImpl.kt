@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_management.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.joda.time.DateTime
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.*
 import pl.polsl.temperature.models.Gateway
@@ -50,7 +51,7 @@ class ManagementActivityImpl:
         }
     }
 
-    override fun showDateTimePicker(initialDate: Date, callback: (date: Date) -> Unit) {
+    override fun showDateTimePicker(initialDate: DateTime, callback: (date: DateTime) -> Unit) {
         managementViewHelper.showDateTimePicker(initialDate, callback)
     }
 
@@ -84,11 +85,11 @@ class ManagementActivityImpl:
         }
     }
 
-    override fun updateStartDate(date: Date){
+    override fun updateStartDate(date: DateTime){
         startDateText.text = (getString(R.string.startDate) + " - " + date.dateToShortString())
     }
 
-    override fun updateEndDate(date: Date){
+    override fun updateEndDate(date: DateTime){
         endDateText.text = (getString(R.string.endDate) + " - " + date.dateToShortString())
     }
 

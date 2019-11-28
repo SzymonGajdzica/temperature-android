@@ -6,6 +6,8 @@ import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormatterBuilder
 import pl.polsl.temperature.models.Message
 import pl.polsl.temperature.models.Station
 import pl.polsl.temperature.models.StationReduced
@@ -22,12 +24,6 @@ fun Dialog.mShow(activity: Activity?){
         show()
 }
 
-fun Activity.hideKeyboard(){
-    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager
-    val view = currentFocus ?: View(this)
-    imm?.hideSoftInputFromWindow(view.windowToken, 0)
-}
-
 fun <T> Response<T>.getMessage(): Message?{
     return try {
         Gson().fromJson(errorBody()?.string(), Message::class.java)
@@ -40,20 +36,27 @@ fun <T> Response<T>.getMessageString(): String?{
     return getMessage()?.run{ title + "\n" + description }
 }
 
-fun Date.dateToShortString(): String{
-    val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ", Locale.ENGLISH)
-    return sdf.format(this)
+fun DateTime.dateToShortString(): String{
+    val patternFormat = DateTimeFormatterBuilder()
+        .appendPattern("HH:mm:ss dd-MM-yyyy")
+        .toFormatter()
+    return toString(patternFormat)
 }
 
-fun Date.dateToString(): String{
-    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH)
-    return sdf.format(this)
+fun DateTime.dateToString(): String{
+    val patternFormat = DateTimeFormatterBuilder()
+        .appendPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
+        .toFormatter()
+    ApplicationContext.log(toString(patternFormat))
+    return toString(patternFormat)
 }
 
-fun String?.stringToDate(): Date?{
+fun String?.stringToDate(): DateTime?{
     return try{
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH)
-        sdf.parse(this.toString())
+        val patternFormat = DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
+            .toFormatter()
+        patternFormat.parseDateTime(this)
     }catch (e: Throwable){
         null
     }
@@ -64,5 +67,3 @@ fun Station.reduce(): StationReduced{
 }
 
 fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
-
-fun Int.toDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
