@@ -2,9 +2,10 @@ package pl.polsl.temperature.application
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.res.Resources
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormatterBuilder
@@ -12,8 +13,6 @@ import pl.polsl.temperature.models.Message
 import pl.polsl.temperature.models.Station
 import pl.polsl.temperature.models.StationReduced
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun Any?.toMString(): String{
     return this?.toString() ?: ""
@@ -34,6 +33,12 @@ fun <T> Response<T>.getMessage(): Message?{
 
 fun <T> Response<T>.getMessageString(): String?{
     return getMessage()?.run{ title + "\n" + description }
+}
+
+fun Context.copyToClipboard(text: CharSequence){
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+    val clip = ClipData.newPlainText("label",text)
+    clipboard?.setPrimaryClip(clip)
 }
 
 fun DateTime.dateToShortString(): String{
@@ -63,7 +68,7 @@ fun String?.stringToDate(): DateTime?{
 }
 
 fun Station.reduce(): StationReduced{
-    return StationReduced(id, name)
+    return StationReduced(id, name, secretId)
 }
 
 fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()

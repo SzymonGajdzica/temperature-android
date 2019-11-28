@@ -3,6 +3,7 @@ package pl.polsl.temperature.management
 import org.joda.time.DateTime
 import pl.polsl.temperature.R
 import pl.polsl.temperature.application.ApplicationContext
+import pl.polsl.temperature.application.copyToClipboard
 import pl.polsl.temperature.application.dateToString
 import pl.polsl.temperature.application.reduce
 import pl.polsl.temperature.models.*
@@ -13,8 +14,6 @@ import pl.polsl.temperature.services.UserService
 import pl.polsl.temperature.utils.OneToast
 import pl.polsl.temperature.utils.SettingsTools
 import retrofit2.create
-import java.util.*
-import kotlin.collections.HashMap
 
 class ManagementPresenterImpl(private val managementActivity: ManagementActivity): ManagementPresenter {
 
@@ -61,6 +60,12 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
             measurementTypes[measurementType.id] = measurementType
             managementActivity.updateUserData(user)
         })
+    }
+
+    override fun copyStationSecretId() {
+        val uuid = currentStation?.secretId  ?: return OneToast.show(R.string.firstSelectStation)
+        ApplicationContext.getAppContext()?.copyToClipboard(uuid.toString())
+        OneToast.show(R.string.scretIdCopied)
     }
 
     override fun getMeasurementType(id: Long): MeasurementType? {

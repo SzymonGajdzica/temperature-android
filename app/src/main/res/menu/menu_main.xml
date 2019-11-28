@@ -11,4 +11,7 @@
     <item android:id="@+id/actionAddMeasurementType"
         android:title="@string/addMeasurementType" />
 
+    <item android:id="@+id/actionGetSecretId"
+        android:title="@string/getStationSecretId" />
+
 </menu>

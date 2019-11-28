@@ -36,4 +36,7 @@
     <string name="firstAddGateway">First add gateway</string>
     <string name="selectGateway">Select gateway</string>
     <string name="selectStation">Select station</string>
+    <string name="getStationSecretId">Get station secret id</string>
+    <string name="firstSelectStation">First select station</string>
+    <string name="scretIdCopied">Secret id copied to clipboard</string>
 </resources>

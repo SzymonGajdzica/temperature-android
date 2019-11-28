@@ -4,22 +4,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_management.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.joda.time.DateTime
 import pl.polsl.temperature.R
-import pl.polsl.temperature.application.*
+import pl.polsl.temperature.application.BaseActivity
+import pl.polsl.temperature.application.dateToShortString
 import pl.polsl.temperature.models.Gateway
 import pl.polsl.temperature.models.Station
 import pl.polsl.temperature.models.User
 import pl.polsl.temperature.utils.OneToast
 import pl.polsl.temperature.utils.SettingsTools
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ManagementActivityImpl:
@@ -48,6 +46,7 @@ class ManagementActivityImpl:
             R.id.actionAddGateway -> managementViewHelper.askForName { managementPresenter.addGateway(it) }
             R.id.actionAddStation -> managementViewHelper.askForName { managementPresenter.addStation(it) }
             R.id.actionAddMeasurementType -> managementViewHelper.askForName { managementPresenter.addMeasurementType(it) }
+            R.id.actionGetSecretId -> managementPresenter.copyStationSecretId()
         }
     }
 

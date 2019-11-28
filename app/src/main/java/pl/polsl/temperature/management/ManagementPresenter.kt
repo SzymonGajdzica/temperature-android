@@ -24,4 +24,6 @@ interface ManagementPresenter {
 
     fun getMeasurementType(id: Long): MeasurementType?
 
+    fun copyStationSecretId()
+
 }
