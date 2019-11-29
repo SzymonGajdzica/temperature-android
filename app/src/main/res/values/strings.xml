@@ -38,5 +38,11 @@
     <string name="selectStation">Select station</string>
     <string name="getStationSecretId">Get station secret id</string>
     <string name="firstSelectStation">First select station</string>
-    <string name="scretIdCopied">Secret id copied to clipboard</string>
+    <string name="secretIdCopied">Secret id copied to clipboard</string>
+    <string name="lastMeasurement">Last measurement</string>
+    <string name="average">Average</string>
+    <string name="firstMeasurement">First measurement</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="current">Current</string>
 </resources>

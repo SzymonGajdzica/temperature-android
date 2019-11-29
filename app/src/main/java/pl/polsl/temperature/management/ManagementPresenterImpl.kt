@@ -25,7 +25,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
     private var currentStation: StationReduced? = null
     private var currentGateway: Gateway? = null
     private var startDate = DateTime(System.currentTimeMillis() - (60*60*1000))
-    private var endDate = DateTime()
+    private var endDate = DateTime(System.currentTimeMillis() + (60*1000))
     private val measurementTypes: HashMap<Long, MeasurementType> = hashMapOf()
     private var measurementTypesLoaded = false
 
@@ -65,7 +65,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
     override fun copyStationSecretId() {
         val uuid = currentStation?.secretId  ?: return OneToast.show(R.string.firstSelectStation)
         ApplicationContext.getAppContext()?.copyToClipboard(uuid.toString())
-        OneToast.show(R.string.scretIdCopied)
+        OneToast.show(R.string.secretIdCopied)
     }
 
     override fun getMeasurementType(id: Long): MeasurementType? {

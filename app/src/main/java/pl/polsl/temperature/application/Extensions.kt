@@ -13,10 +13,7 @@ import pl.polsl.temperature.models.Message
 import pl.polsl.temperature.models.Station
 import pl.polsl.temperature.models.StationReduced
 import retrofit2.Response
-
-fun Any?.toMString(): String{
-    return this?.toString() ?: ""
-}
+import java.util.*
 
 fun Dialog.mShow(activity: Activity?){
     if(activity?.isFinishing == false)
@@ -39,6 +36,12 @@ fun Context.copyToClipboard(text: CharSequence){
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
     val clip = ClipData.newPlainText("label",text)
     clipboard?.setPrimaryClip(clip)
+}
+
+fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
+
+fun Date.toDateTime(): DateTime {
+    return DateTime(this)
 }
 
 fun DateTime.dateToShortString(): String{
