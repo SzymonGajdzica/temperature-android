@@ -57,7 +57,6 @@ class LoginActivityImpl :
         setOf<EditText>(usernameEditText, passwordEditText).forEach {
             it.text = null
         }
-        OneToast.show(R.string.loggedSuccessfully)
         startActivity(Intent(this, ManagementActivityImpl::class.java))
     }
 

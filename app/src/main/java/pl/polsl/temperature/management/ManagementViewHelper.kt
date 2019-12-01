@@ -60,7 +60,7 @@ class ManagementViewHelper(
                     .append("\n")
                     .append(activity.getString(R.string.current))
                     .append(": ")
-                    .append(rawValues.first().round())
+                    .append(rawValues.last().round())
                     .append("\n")
                     .append("\n")
                     .toString()

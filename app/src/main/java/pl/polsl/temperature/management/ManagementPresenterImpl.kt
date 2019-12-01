@@ -33,6 +33,7 @@ class ManagementPresenterImpl(private val managementActivity: ManagementActivity
         if(checkTokenExpired())
             return
         userService.getUserData().enqueue(managementActivity.getContext().createCallback {
+            OneToast.show(R.string.loggedSuccessfully)
             currentUser = it
             managementActivity.updateUserData(it)
             managementActivity.updateEndDate(endDate)
